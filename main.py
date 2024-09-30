@@ -4,7 +4,7 @@ import time
 
 app = Flask(__name__)
 
-BITRIX_WEBHOOK_URL = "https://marketingsolucoes.bitrix24.com.br/rest/35002/7a2nuej815yjx5bg/bizproc.workflow.start"
+BITRIX_WEBHOOK_URL = "{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/bizproc.workflow.start"
 
 @app.route('/webhook/workflowone', methods=['POST'])
 def workflowone():
