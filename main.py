@@ -16,24 +16,31 @@ BASE_URL_API_BITRIX = os.getenv('BASE_URL_API_BITRIX')
 # Define the webhook URL
 BITRIX_WEBHOOK_URL = f"{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/bizproc.workflow.start"
 
-@app.route('/webhook/workflowone', methods=['POST'])
-def workflowone():
-    return start_workflow("1196")
+WORKFLOW_IDS = {
+    "workflow1": "1196",
+    "workflow2": "1196",
+    "workflow3": "1196",
+    "workflow4": "1196",
+    "workflow5": "1196",
+    "workflow6": "1196",
+    "workflow7": "1196",
+    "workflow8": "1196",
+    "workflow9": "1196",
+    "workflow10": "1200"
+}
 
-@app.route('/webhook/workflowtwo', methods=['POST'])
-def workflowtwo():
-    return start_workflow("1200")
-
-@app.route('/webhook/workflowthree', methods=['POST'])
-def workflowthree():
-    return start_workflow("1202")
-
-def start_workflow(workflow_id):
+@app.route('/webhook/<workflow_name>', methods=['POST'])
+def start_workflow(workflow_name):
     print("Webhook acionado!")  # Log to check if the endpoint is called
     deal_id = request.args.get('deal_id')
-    
+
     if not deal_id:
         return jsonify({"error": "deal_id não fornecido"}), 400
+
+    # Get the workflow ID from the dictionary
+    workflow_id = WORKFLOW_IDS.get(workflow_name)
+    if not workflow_id:
+        return jsonify({"error": "Workflow não encontrado"}), 404
 
     array = ["crm", "CCrmDocumentDeal", f"DEAL_{deal_id}"]
     data = {
@@ -41,7 +48,7 @@ def start_workflow(workflow_id):
         "DOCUMENT_ID": array
     }
 
-    # Optional: Log the data being sent to Bitrix for debugging
+    # Log the data being sent to Bitrix for debugging
     print(f"Sending data to Bitrix: {data}")
 
     time.sleep(10)  # Consider removing or reducing this in production
