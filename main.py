@@ -17,16 +17,16 @@ BASE_URL_API_BITRIX = os.getenv('BASE_URL_API_BITRIX')
 BITRIX_WEBHOOK_URL = f"{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/bizproc.workflow.start"
 
 WORKFLOW_IDS = {
-    "workflow1": "1196",
-    "workflow2": "1196",
-    "workflow3": "1196",
-    "workflow4": "1196",
-    "workflow5": "1196",
-    "workflow6": "1196",
-    "workflow7": "1196",
-    "workflow8": "1196",
-    "workflow9": "1196",
-    "workflow10": "1200"
+    "workflow1": "1196", #primeiro boleto(1.1)
+    "workflow2": "1200", #primeiro boleto(1.2)
+    "workflow3": "1204", #segundo boleto(1.1)
+    "workflow4": "1206", #segundo boleto(1.2)
+    "workflow5": "1208", #terceiro boleto(1.1)
+    "workflow6": "1210", #terceiro boleto(1.2)
+    "workflow7": "1212", #quarto boleto(1.1)
+    "workflow8": "1214", #quarto boleto(1.2)
+    "workflow9": "1216", #quinto boleto(1.1)
+    "workflow10": "1218" #quinto boleto(1.2)
 }
 
 @app.route('/webhook/<workflow_name>', methods=['POST'])
