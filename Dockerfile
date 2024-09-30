@@ -7,6 +7,12 @@ WORKDIR /app
 # Copia o arquivo de requisitos
 COPY requirements.txt .
 
+ENV PROFILE=${PROFILE}
+ENV BASE_URL_API_BITRIX=${BASE_URL_API_BITRIX}
+ENV CODIGO_BITRIX=${CODIGO_BITRIX}
+ENV PORT=${PORT}
+
+
 # Instala as dependências
 RUN pip install --no-cache-dir -r requirements.txt
 
