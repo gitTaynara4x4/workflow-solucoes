@@ -64,8 +64,8 @@ def start_workflow(workflow_name):
 
     return jsonify(responses), 200
 
-@app.route('/webhook2/<workflow_name>', methods=['POST'])
-def start_workflow2(workflow_name):
+@app.route('/webhook2/', methods=['POST'])
+def start_workflow2():
     print("Webhook acionado!")  # Log to check if the endpoint is called
     deal_ids = request.args.get('deal_ids')  # Expecting JSON body with a "deal_ids" array
 
@@ -73,6 +73,7 @@ def start_workflow2(workflow_name):
         return jsonify({"error": "deal_ids não fornecido"}), 400
 
     # Get the workflow ID from the dictionary
+    workflow_name = request.args.get('workflow_name')
     workflow_id = WORKFLOW_IDS.get(workflow_name)
     if not workflow_id:
         return jsonify({"error": "Workflow não encontrado"}), 404
