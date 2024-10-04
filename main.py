@@ -52,7 +52,6 @@ def start_workflow(workflow_name):
     # Log the data being sent to Bitrix for debugging
     print(f"Sending data to Bitrix: {data}")
 
-    time.sleep(10)  # Consider removing or reducing this in production
     try:
         response = requests.post(BITRIX_WEBHOOK_URL, json=data)
         response.raise_for_status()  # Raise an error for bad responses
