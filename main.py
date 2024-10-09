@@ -26,7 +26,9 @@ WORKFLOW_IDS = {
     "workflow7": "1212", #quarto boleto(1.1)
     "workflow8": "1214", #quarto boleto(1.2)
     "workflow9": "1216", #quinto boleto(1.1)
-    "workflow10": "1218" #quinto boleto(1.2)
+    "workflow10": "1218", #quinto boleto(1.2)
+    "workflow11": "1314", #workflow para o site
+    
 }
 
 @app.route('/webhook/<workflow_name>', methods=['POST'])
