@@ -91,4 +91,4 @@ def start_workflow2():
     return jsonify(responses), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=9997)
+    app.run(host='0.0.0.0', port=99977)
