@@ -28,7 +28,7 @@ WORKFLOW_IDS = {
     "workflow9": "1216", #quinto boleto(1.1)
     "workflow10": "1218", #quinto boleto(1.2)
     "workflow11": "1314", #workflow para o site
-    "workflow12": "1294" #workflow para o site
+    "workflow12": "1294" #workflow para a fila de ativos
     
 }
 
