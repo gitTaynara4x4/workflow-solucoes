@@ -28,8 +28,8 @@ WORKFLOW_IDS = {
     "workflow9": "1216", #quinto boleto(1.1)
     "workflow10": "1218", #quinto boleto(1.2)
     "workflow11": "1314", #workflow para o site
-    "workflow12": "1294" #workflow para a fila de ativos
-    
+    "workflow12": "1294", #workflow para a fila de ativos
+    "workflow13": "1390" #workflow para campo sem fuso horario ser atualizado. 
 }
 
 @app.route('/webhook/<workflow_name>', methods=['POST'])
