@@ -3,6 +3,7 @@ import requests
 import os
 from dotenv import load_dotenv
 import time
+from datetime import datetime, timedelta, timezone
 
 app = Flask(__name__)
 
@@ -16,6 +17,31 @@ BASE_URL_API_BITRIX = os.getenv('BASE_URL_API_BITRIX')
 # Define the webhook URL
 BITRIX_WEBHOOK_URL = f"{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/bizproc.workflow.start"
 
+def update_card_bitrix(card_id, name_of_field, value):
+    url = f"{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/crm.deal.update"
+    data = {
+        'id': card_id,
+        'fields': {
+            name_of_field: value
+        }
+    }
+    if value == None:
+        print('⚠ A varivel value é nula ⚠')
+        return -1
+
+    response = requests.post(url, json=data)
+    if response.status_code == 200:
+        print(f"Field '{name_of_field}' updated successfully.")
+    else:
+        print("Failed to update field.")
+        print(response.text)
+
+def convert_for_gmt_minus_3(date_from_bitrix):
+    hour_obj = datetime.fromisoformat(date_from_bitrix)
+    hour_sub = hour_obj - timedelta(hours=6)
+    new_hour_formated = hour_sub.isoformat()
+    return new_hour_formated
+    
 WORKFLOW_IDS = {
     "workflow1": "1196", #primeiro boleto(1.1)
     "workflow2": "1200", #primeiro boleto(1.2)
@@ -53,9 +79,6 @@ def start_workflow(workflow_name):
         "DOCUMENT_ID": array
     }
 
-    # Log the data being sent to Bitrix for debugging
-    print(f"Sending data to Bitrix: {data}")
-
     time.sleep(10)  # Consider removing or reducing this in production
     try:
         response = requests.post(BITRIX_WEBHOOK_URL, json=data)
@@ -64,6 +87,18 @@ def start_workflow(workflow_name):
     except requests.exceptions.RequestException as e:
         print(f"Error calling Bitrix API: {e}")
         return jsonify({"error": "Failed to start workflow", "details": str(e)}), 500
+
+
+@app.route('/date-time-brazil-in-bitrix', methods=['POST'])
+def update_new_date():
+    deal_id = request.args.get('ID')
+    date_create = request.args.get('DATE_CREATE')
+    try:
+        formated_date = convert_for_gmt_minus_3(date_create)
+        update_card_bitrix(deal_id, 'UF_CRM_1731416690056', formated_date)
+    except requests.exceptions.RequestException as e:
+        print(f"Error update date field: {e}")
+        return jsonify({"error": f"Failed to update datetime in Bitrix for card: {deal_id}"}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=97)
