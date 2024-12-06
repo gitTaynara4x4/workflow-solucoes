@@ -58,18 +58,19 @@ WORKFLOW_IDS = {
     "workflow13": "1390", #workflow para campo sem fuso horario ser atualizado. 
     "workflow14": "1426", #workflow que muda o campo de Relatorio data. 
     "workflow15": "1428", #workflow que muda o campo de Relatorio data/hora. 
-    "workflow16": "1474"
+    "workflow16": "1474",
+    "workflowouro": "1496"
 }
 
 @app.route('/webhook/<workflow_name>', methods=['POST'])
 def start_workflow(workflow_name):
-    print("Webhook acionado!")  # Log to check if the endpoint is called
+    print("Webhook acionado!") 
     deal_id = request.args.get('deal_id')
 
     if not deal_id:
         return jsonify({"error": "deal_id não fornecido"}), 400
 
-    # Get the workflow ID from the dictionary
+
     workflow_id = WORKFLOW_IDS.get(workflow_name)
     if not workflow_id:
         return jsonify({"error": "Workflow não encontrado"}), 404
@@ -80,10 +81,10 @@ def start_workflow(workflow_name):
         "DOCUMENT_ID": array
     }
 
-    time.sleep(10)  # Consider removing or reducing this in production
+    time.sleep(10) 
     try:
         response = requests.post(BITRIX_WEBHOOK_URL, json=data)
-        response.raise_for_status()  # Raise an error for bad responses
+        response.raise_for_status()  
         return jsonify(response.json()), response.status_code
     except requests.exceptions.RequestException as e:
         print(f"Error calling Bitrix API: {e}")
