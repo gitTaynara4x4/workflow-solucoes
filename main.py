@@ -59,6 +59,7 @@ WORKFLOW_IDS = {
     "workflow14": "1426", #workflow que muda o campo de Relatorio data. 
     "workflow15": "1428", #workflow que muda o campo de Relatorio data/hora. 
     "workflow16": "1474",
+    "workflowredeneutra": "1502",
     "workflowouro": "1496",
     "workflowpadrao": "1498",
     "workflowprata": "1500"
