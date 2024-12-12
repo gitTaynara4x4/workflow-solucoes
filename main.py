@@ -62,7 +62,16 @@ WORKFLOW_IDS = {
     "workflowredeneutra": "1502",
     "workflowouro": "1496",
     "workflowpadrao": "1498",
-    "workflowprata": "1500"
+    "workflowprata": "1500",
+    "workflowt1_t3_t4": "1514",
+    "workflowt5_t6_t7": "1518",
+    "workflowt8_t9": "1520",
+    "workflowt10_t12": "1522",
+    "workflowt2_t11_t13_t14": "1516",
+    "workflowt_ALTOS_PARNAIBA_TERESINA": "1524",
+    "workflowt_CIDADES_ESPECIAIS_1": "1526",
+    "workflowt_CIDADES_ESPECIAIS_2": "1528",
+    "workflowt_CIDADES_ESPECIAIS_3": "1530"
 }
 
 @app.route('/webhook/<workflow_name>', methods=['POST'])
