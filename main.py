@@ -71,7 +71,15 @@ WORKFLOW_IDS = {
     "workflowt_ALTOS_PARNAIBA_TERESINA": "1524",
     "workflowt_CIDADES_ESPECIAIS_1": "1526",
     "workflowt_CIDADES_ESPECIAIS_2": "1528",
-    "workflowt_CIDADES_ESPECIAIS_3": "1530"
+    "workflowt_CIDADES_ESPECIAIS_3": "1530",
+    "workflow_desktop_ferro": "1542",
+    "workflow_desktop_bronze": "1540",
+    "workflow_desktop_prata": "1544",
+    "workflow_desktop_ouro": "1546",
+    "workflow_desktop_platina": "1548",
+    "workflow_desktop_diamante": "1550",
+    "workflow_desktop_ascedente": "1552",
+    "workflow_desktop_imortal": "1554"
 }
 
 @app.route('/webhook/<workflow_name>', methods=['POST'])
