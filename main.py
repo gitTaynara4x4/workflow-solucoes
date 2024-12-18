@@ -79,7 +79,8 @@ WORKFLOW_IDS = {
     "workflow_desktop_platina": "1548",
     "workflow_desktop_diamante": "1550",
     "workflow_desktop_ascedente": "1552",
-    "workflow_desktop_imortal": "1554"
+    "workflow_desktop_imortal": "1554",
+    "workflow_blink": "1558"
 }
 
 @app.route('/webhook/<workflow_name>', methods=['POST'])
