@@ -14,8 +14,32 @@ CODIGO_BITRIX_STR = os.getenv('CODIGO_BITRIX_STR')
 PROFILE = os.getenv('PROFILE')
 BASE_URL_API_BITRIX = os.getenv('BASE_URL_API_BITRIX')
 
-# Define the webhook URL
+
 BITRIX_WEBHOOK_URL = f"{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/bizproc.workflow.start"
+
+
+
+def make_request_with_retry(url, data, max_retries=3, retry_delay=5):
+    """Faz a requisição e tenta novamente em caso de erro (404, 400, 500, etc.)."""
+    for attempt in range(max_retries):
+        try:
+            print(f"🕒 Tentativa {attempt + 1} de {max_retries} para {url}")
+            response = requests.post(url, json=data)
+            
+            # Verifica se a resposta tem status 200
+            response.raise_for_status()
+            
+            print("✅ Requisição bem-sucedida!")
+            return response  # Retorna a resposta se for bem-sucedida
+        except requests.exceptions.RequestException as e:
+            print(f"⚠️ Erro na tentativa {attempt + 1}: {e}")
+            if attempt < max_retries - 1:
+                print(f"⏳ Aguardando {retry_delay} segundos antes de tentar novamente...")
+                time.sleep(retry_delay)
+            else:
+                print("❌ Máximo de tentativas atingido. Falha na requisição.")
+    return None  # Retorna None se todas as tentativas falharem
+
 
 def update_card_bitrix(card_id, name_of_field, value):
     url = f"{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/crm.deal.update"
@@ -124,6 +148,7 @@ def update_new_date():
     except requests.exceptions.RequestException as e:
         print(f"Error update date field: {e}")
         return jsonify({"error": f"Failed to update datetime in Bitrix for card: {deal_id}"}), 500
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=97)
