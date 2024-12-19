@@ -41,6 +41,9 @@ def make_request_with_retry(url, data, max_retries=3, retry_delay=5):
     return None  # Retorna None se todas as tentativas falharem
 
 
+
+
+
 def update_card_bitrix(card_id, name_of_field, value):
     url = f"{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/crm.deal.update"
     data = {
@@ -49,16 +52,23 @@ def update_card_bitrix(card_id, name_of_field, value):
             name_of_field: value
         }
     }
-    if value == None:
-        print('⚠ A varivel value é nula ⚠')
+    if value is None:
+        print('⚠️ A variável "value" está nula ⚠️')
         return -1
 
-    response = requests.post(url, json=data)
-    if response.status_code == 200:
-        print(f"Field '{name_of_field}' updated successfully.")
+    response = make_request_with_retry(url, data)
+    if response and response.status_code == 200:
+        print(f"✅ Campo '{name_of_field}' atualizado com sucesso.")
+        return True
     else:
-        print("Failed to update field.")
-        print(response.text)
+        print("❌ Falha ao atualizar o campo.")
+        if response is not None:
+            print(response.text)
+        return None
+
+
+
+
 
 def convert_for_gmt_minus_3(date_from_bitrix):
     hour_obj = datetime.fromisoformat(date_from_bitrix)
@@ -109,33 +119,40 @@ WORKFLOW_IDS = {
     "workflow_algar": "1564"
 }
 
+
+
+
+
+
+
 @app.route('/webhook/<workflow_name>', methods=['POST'])
 def start_workflow(workflow_name):
-    print("Webhook acionado!") 
+    print("✅ Webhook acionado!") 
     deal_id = request.args.get('deal_id')
 
     if not deal_id:
         return jsonify({"error": "deal_id não fornecido"}), 400
-
 
     workflow_id = WORKFLOW_IDS.get(workflow_name)
     if not workflow_id:
         return jsonify({"error": "Workflow não encontrado"}), 404
 
     array = ["crm", "CCrmDocumentDeal", f"DEAL_{deal_id}"]
-    data = {
-        "TEMPLATE_ID": workflow_id,
-        "DOCUMENT_ID": array
-    }
+    data = {"TEMPLATE_ID": workflow_id, "DOCUMENT_ID": array}
 
-    time.sleep(10) 
-    try:
-        response = requests.post(BITRIX_WEBHOOK_URL, json=data)
-        response.raise_for_status()  
-        return jsonify(response.json()), response.status_code
-    except requests.exceptions.RequestException as e:
-        print(f"Error calling Bitrix API: {e}")
-        return jsonify({"error": "Failed to start workflow", "details": str(e)}), 500
+    response = make_request_with_retry(BITRIX_WEBHOOK_URL, data)
+    if response is None:
+        return jsonify({"error": "Todas as tentativas falharam", "details": "Verifique o log para mais informações"}), 500
+    
+    return jsonify(response.json()), response.status_code
+
+
+
+
+
+
+
+
 
 
 @app.route('/date-time-brazil-in-bitrix', methods=['POST'])
