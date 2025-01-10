@@ -117,7 +117,8 @@ WORKFLOW_IDS = {
     "workflow_blink": "1558",
     "workflow_tim": "1560",
     "workflow_algar": "1564",
-    "workflow_contactid": "1626"
+    "workflow_contactid": "1626",
+    "workflow_phase": "1628"
 }
 
 
