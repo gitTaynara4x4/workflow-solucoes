@@ -119,7 +119,8 @@ WORKFLOW_IDS = {
     "workflow_algar": "1564",
     "workflow_contactid": "1626",
     "workflow_phase": "1628",
-    "workflow_vencimento": "1630"
+    "workflow_vencimento": "1630",
+    "workflow_templatemelhorfibra": "1652"
 }
 
 
