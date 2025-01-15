@@ -120,7 +120,8 @@ WORKFLOW_IDS = {
     "workflow_contactid": "1626",
     "workflow_phase": "1628",
     "workflow_vencimento": "1630",
-    "workflow_saudademelhorfibra": "1652"
+    "workflow_saudademelhorfibra": "1652",
+    "worklow_preenchercidade":"1658"
 }
 
 
