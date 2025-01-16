@@ -121,7 +121,8 @@ WORKFLOW_IDS = {
     "workflow_phase": "1628",
     "workflow_vencimento": "1630",
     "workflow_saudademelhorfibra": "1652",
-    "worklow_preenchercidade":"1658"
+    "worklow_preenchercidade":"1658",
+    "workflow_algar_mesh":"1660"
 }
 
 
