@@ -116,13 +116,12 @@ WORKFLOW_IDS = {
     "workflow_desktop_imortal": "1554",
     "workflow_blink": "1558",
     "workflow_tim": "1560",
-    "workflow_algar": "1564",
+    "workflow_algar": "1660",
     "workflow_contactid": "1626",
     "workflow_phase": "1628",
     "workflow_vencimento": "1630",
     "workflow_saudademelhorfibra": "1652",
-    "worklow_preenchercidade":"1658",
-    "workflow_algar_mesh":"1660"
+    "worklow_preenchercidade":"1658"
 }
 
 
