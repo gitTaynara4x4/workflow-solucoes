@@ -116,6 +116,7 @@ WORKFLOW_IDS = {
     "workflow_desktop_imortal": "1554",
     "workflow_blink": "1558",
     "workflow_tim": "1560",
+    "workflow_algar": "1564",
     "workflow_algar_600MB": "1564",
     "workflow_algar_800MB": "1660",
     "workflow_algar_specialcities": "1666",
