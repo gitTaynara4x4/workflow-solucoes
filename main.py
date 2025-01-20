@@ -103,6 +103,7 @@ WORKFLOW_IDS = {
     "workflowt_CIDADES_ESPECIAIS_1": "1674",
     "workflowt_CIDADES_ESPECIAIS_2": "1676",
     "workflowt_CIDADES_ESPECIAIS_3": "1678",
+    "workflow_TELEFONEFIXO_T5_a_T7": "1680",
     "workflow_desktop_ferro": "1542",
     "workflow_desktop_bronze": "1540",
     "workflow_desktop_prata": "1544",
