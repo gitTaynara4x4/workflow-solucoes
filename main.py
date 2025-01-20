@@ -97,15 +97,12 @@ WORKFLOW_IDS = {
     "workflowouro": "1496",
     "workflowpadrao": "1498",
     "workflowprata": "1500",
-    "workflowt1_t3_t4": "1514",
-    "workflowt5_t6_t7": "1518",
-    "workflowt8_t9": "1520",
-    "workflowt10_t12": "1522",
-    "workflowt2_t11_t13_t14": "1516",
-    "workflowt_ALTOS_PARNAIBA_TERESINA": "1524",
-    "workflowt_CIDADES_ESPECIAIS_1": "1526",
-    "workflowt_CIDADES_ESPECIAIS_2": "1528",
-    "workflowt_CIDADES_ESPECIAIS_3": "1530",
+    "workflowt1_a_t9": "1668",
+    "workflowt10_t14": "1670",
+    "workflowt_ALTOS_PARNAIBA_TERESINA": "1672",
+    "workflowt_CIDADES_ESPECIAIS_1": "1674",
+    "workflowt_CIDADES_ESPECIAIS_2": "1676",
+    "workflowt_CIDADES_ESPECIAIS_3": "1678",
     "workflow_desktop_ferro": "1542",
     "workflow_desktop_bronze": "1540",
     "workflow_desktop_prata": "1544",
@@ -124,8 +121,7 @@ WORKFLOW_IDS = {
     "workflow_phase": "1628",
     "workflow_vencimento": "1630",
     "workflow_saudademelhorfibra": "1652",
-    "worklow_preenchercidade": "1658",
-    "workflow_posvendanome":"1664"
+
 }
 
 
