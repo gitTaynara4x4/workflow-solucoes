@@ -97,6 +97,7 @@ WORKFLOW_IDS = {
     "workflowouro": "1496",
     "workflowpadrao": "1498",
     "workflowprata": "1500",
+    "workflowofertaspecial": "1682",
     "workflowt1_a_t9": "1668",
     "workflowt10_t14": "1670",
     "workflowt_ALTOS_PARNAIBA_TERESINA": "1672",
