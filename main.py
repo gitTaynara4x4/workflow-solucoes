@@ -123,6 +123,7 @@ WORKFLOW_IDS = {
     "workflow_phase": "1628",
     "workflow_vencimento": "1630",
     "workflow_saudademelhorfibra": "1652",
+    "workflow_formatacao_nome_primeiro_boleto_vero": "1702"
 
 }
 
