@@ -124,8 +124,7 @@ WORKFLOW_IDS = {
     "workflow_vencimento": "1630",
     "workflow_saudademelhorfibra": "1652",
     "workflow_formatacao_nome_primeiro_boleto_vero": "1702",
-    "workflow_copiar_card_para_teste_samuel": "1726"
-
+    "workflow_cep-adress": "1744"
 }
 
 
