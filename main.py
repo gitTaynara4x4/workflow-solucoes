@@ -156,19 +156,24 @@ def start_workflow(workflow_name):
 
 
 
-@app.route('/update_deal/<int:deal_id>', methods=['POST'])
-def update_deal(deal_id):
+
+@app.route('/update_deal', methods=['POST'])
+def update_deal():
+    data = request.get_json()
+    deal_id = data.get("deal_id")  
+    random_value = data.get("value", 0)  
+    
+    if not deal_id:
+        return jsonify({"error": "deal_id é obrigatório"}), 400
+    
     url = "https://marketingsolucoes.bitrix24.com.br/rest/35002/7a2nuej815yjx5bg/crm.deal.update"
     params = {
         "ID": deal_id,
-        "Fields[UF_CRM_1700661314351]": 33236450
+        "Fields[UF_CRM_1700661314351]": random_value
     }
     
     response = requests.post(url, params=params)
     return jsonify(response.json())
-
-
-
 
 
 
