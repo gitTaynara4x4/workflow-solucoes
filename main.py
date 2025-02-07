@@ -159,7 +159,7 @@ def start_workflow(workflow_name):
 
 @app.route('/update_deal', methods=['POST'])
 def update_deal():
-    data = request.get_json()
+    data = request.args()
     deal_id = data.get("deal_id")  
     random_value = data.get("value", 0)  
     
