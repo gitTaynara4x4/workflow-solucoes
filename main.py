@@ -168,7 +168,7 @@ def update_deal():
     if random_value is None:
         random_value = random.randint(100000, 999999)  # Gera um número aleatório entre 100000 e 999999
     
-    url = "https://marketingsolucoes.bitrix24.com.br/rest/35002/7a2nuej815yjx5bg/crm.deal.update"
+    url = "https://marketingsolucoes.bitrix24.com.br/rest/5332/s3wx07gjcfywp51q/crm.deal.update"
     params = {
         "ID": deal_id,
         "Fields[UF_CRM_1700661314351]": random_value
