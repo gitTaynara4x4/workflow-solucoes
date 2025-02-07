@@ -157,22 +157,18 @@ def start_workflow(workflow_name):
 
 
 
+@app.route('/update_deal', methods=['POST'])
+def update_deal():
+    url = "https://marketingsolucoes.bitrix24.com.br/rest/35002/7a2nuej815yjx5bg/crm.deal.update"
+    params = {
+        "ID": 214464,
+        "Fields[UF_CRM_1697762313423]": "TESTE"
+    }
+    
+    response = requests.post(url, params=params)
+    return jsonify(response.json())
 
 
-
-
-
-
-@app.route('/date-time-brazil-in-bitrix', methods=['POST'])
-def update_new_date():
-    deal_id = request.args.get('ID')
-    date_create = request.args.get('DATE_CREATE')
-    try:
-        formated_date = convert_for_gmt_minus_3(date_create)
-        update_card_bitrix(deal_id, 'UF_CRM_1731416690056', formated_date)
-    except requests.exceptions.RequestException as e:
-        print(f"Error update date field: {e}")
-        return jsonify({"error": f"Failed to update datetime in Bitrix for card: {deal_id}"}), 500
 
 
 if __name__ == '__main__':
