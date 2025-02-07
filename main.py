@@ -3,6 +3,7 @@ import requests
 import os
 from dotenv import load_dotenv
 import time
+import random
 from datetime import datetime, timedelta, timezone
 
 app = Flask(__name__)
@@ -159,10 +160,13 @@ def start_workflow(workflow_name):
 @app.route('/update_deal', methods=['POST'])
 def update_deal():
     deal_id = request.args.get("deal_id")  # Obtém o ID do negócio da query string
-    random_value = request.args.get("value", 0)  # Obtém o valor da query string, padrão 0
+    random_value = request.args.get("value")  # Obtém o valor da query string
     
     if not deal_id:
         return jsonify({"error": "deal_id é obrigatório"}), 400
+    
+    if random_value is None:
+        random_value = random.randint(100000, 999999)  # Gera um número aleatório entre 100000 e 999999
     
     url = "https://marketingsolucoes.bitrix24.com.br/rest/35002/7a2nuej815yjx5bg/crm.deal.update"
     params = {
