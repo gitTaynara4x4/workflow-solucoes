@@ -156,12 +156,10 @@ def start_workflow(workflow_name):
 
 
 
-
 @app.route('/update_deal', methods=['POST'])
 def update_deal():
-    data = request.args()
-    deal_id = data.get("deal_id")  
-    random_value = data.get("value", 0)  
+    deal_id = request.args.get("deal_id")  # Obtém o ID do negócio da query string
+    random_value = request.args.get("value", 0)  # Obtém o valor da query string, padrão 0
     
     if not deal_id:
         return jsonify({"error": "deal_id é obrigatório"}), 400
