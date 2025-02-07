@@ -156,17 +156,18 @@ def start_workflow(workflow_name):
 
 
 
-
-@app.route('/update_deal', methods=['POST'])
-def update_deal():
+@app.route('/update_deal/<int:deal_id>', methods=['POST'])
+def update_deal(deal_id):
     url = "https://marketingsolucoes.bitrix24.com.br/rest/35002/7a2nuej815yjx5bg/crm.deal.update"
     params = {
-        "ID": 214464,
-        "Fields[UF_CRM_1697762313423]": "TESTE"
+        "ID": deal_id,
+        "Fields[UF_CRM_1700661314351]": 33236450
     }
     
     response = requests.post(url, params=params)
     return jsonify(response.json())
+
+
 
 
 
