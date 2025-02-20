@@ -162,8 +162,8 @@ def start_workflow(workflow_name):
 def update_deal():
     deal_id = request.args.get("deal_id")  # Obtém o ID do negócio da query string
     random_value = request.args.get("value")  # Obtém o valor da query string
-    print(f" Mudança Feita {deal_id}"
-    logging.info(f" Mudança Feita {deal_id}"
+    print(f" Mudança Feita {deal_id}")
+    logging.info(f" Mudança Feita {deal_id}")
            
     if not deal_id:
         return jsonify({"error": "deal_id é obrigatório"}), 400
