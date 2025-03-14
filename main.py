@@ -11,15 +11,10 @@ app = Flask(__name__)
 
 # Load environment variables
 load_dotenv()
-CODIGO_BITRIX = os.getenv('CODIGO_BITRIX')
-CODIGO_BITRIX_STR = os.getenv('CODIGO_BITRIX_STR')
-PROFILE = os.getenv('PROFILE')
-BASE_URL_API_BITRIX = os.getenv('BASE_URL_API_BITRIX')
 
+BITRIX_URL = os.getenv('BITRIX_URL')
 
-BITRIX_WEBHOOK_URL = f"{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/bizproc.workflow.start"
-
-
+BITRIX_WEBHOOK_URL = f"{BITRIX_URL}/bizproc.workflow.start"
 
 def make_request_with_retry(url, data, max_retries=3, retry_delay=5):
     """Faz a requisição e tenta novamente em caso de erro (404, 400, 500, etc.)."""
@@ -41,10 +36,6 @@ def make_request_with_retry(url, data, max_retries=3, retry_delay=5):
             else:
                 print("❌ Máximo de tentativas atingido. Falha na requisição.")
     return None  # Retorna None se todas as tentativas falharem
-
-
-
-
 
 def update_card_bitrix(card_id, name_of_field, value):
     url = f"{BASE_URL_API_BITRIX}/{PROFILE}/{CODIGO_BITRIX}/crm.deal.update"
@@ -68,10 +59,6 @@ def update_card_bitrix(card_id, name_of_field, value):
             print(response.text)
         return None
 
-
-
-
-
 def convert_for_gmt_minus_3(date_from_bitrix):
     hour_obj = datetime.fromisoformat(date_from_bitrix)
     hour_sub = hour_obj - timedelta(hours=6)
@@ -91,49 +78,19 @@ WORKFLOW_IDS = {
     "workflow10": "1218", #quinto boleto(1.2)
     "workflow11": "1314", #workflow para o site
     "workflow12": "1294", #workflow para a fila de ativos
-    "workflow13": "1390", #workflow para campo sem fuso horario ser atualizado. 
-    "workflow14": "1426", #workflow que muda o campo de Relatorio data. 
-    "workflow15": "1428", #workflow que muda o campo de Relatorio data/hora. 
+    "workflow13": "1390", #workflow para campo sem fuso horario ser atualizado.
+    "workflow14": "1426", #workflow que muda o campo de Relatorio data.
+    "workflow15": "1428", #workflow que muda o campo de Relatorio data/hora.
     "workflow16": "1474",
-    "workflowredeneutra": "1502",
-    "workflowouro": "1496",
-    "workflowpadrao": "1498",
-    "workflowprata": "1500",
-    "workflowofertaspecial": "1682",
-    "workflowt1_a_t9": "1668",
-    "workflowt10_t14": "1670",
-    "workflowt_ALTOS_PARNAIBA_TERESINA": "1672",
-    "workflowt_CIDADES_ESPECIAIS_1": "1674",
-    "workflowt_CIDADES_ESPECIAIS_2": "1676",
-    "workflowt_CIDADES_ESPECIAIS_3": "1678",
-    "workflow_TELEFONEFIXO_T5_a_T7": "1680",
-    "workflow_desktop_ferro": "1542",
-    "workflow_desktop_bronze": "1540",
-    "workflow_desktop_prata": "1544",
-    "workflow_desktop_ouro": "1546",
-    "workflow_desktop_platina": "1548",
-    "workflow_desktop_diamante": "1550",
-    "workflow_desktop_ascedente": "1552",
-    "workflow_desktop_imortal": "1554",
-    "workflow_blink": "1558",
-    "workflow_tim": "1560",
-    "workflow_algar": "1564",
-    "workflow_algar_600MB": "1564",
-    "workflow_algar_800MB": "1660",
-    "workflow_algar_specialcities": "1666",
     "workflow_contactid": "1626",
     "workflow_phase": "1628",
     "workflow_vencimento": "1630",
     "workflow_saudademelhorfibra": "1652",
     "workflow_formatacao_nome_primeiro_boleto_vero": "1702",
-    "workflow_cep-adress": "1744"
+    "workflow_cep-adress": "1744",
+    "utm": "1862", # Workflow teste de UTMS
+    "workflow_send_plans_geral": "1940",
 }
-
-
-
-
-
-
 
 @app.route('/webhook/<workflow_name>', methods=['POST'])
 def start_workflow(workflow_name):
@@ -155,31 +112,6 @@ def start_workflow(workflow_name):
         return jsonify({"error": "Todas as tentativas falharam", "details": "Verifique o log para mais informações"}), 500
     
     return jsonify(response.json()), response.status_code
-
-
-
-@app.route('/update_deal', methods=['POST'])
-def update_deal():
-    deal_id = request.args.get("deal_id")  # Obtém o ID do negócio da query string
-    random_value = request.args.get("value")  # Obtém o valor da query string
-    print(f" Mudança Feita {deal_id}")
-    logging.info(f" Mudança Feita {deal_id}")
-           
-    if not deal_id:
-        return jsonify({"error": "deal_id é obrigatório"}), 400
-    
-    if random_value is None:
-        random_value = random.randint(100000, 999999)  # Gera um número aleatório entre 100000 e 999999
-    
-    url = "https://marketingsolucoes.bitrix24.com.br/rest/5332/s3wx07gjcfywp51q/crm.deal.update"
-    params = {
-        "ID": deal_id,
-        "Fields[UF_CRM_1700661314351]": random_value
-    }
-    
-    response = requests.post(url, params=params)
-    return jsonify(response.json())
-
 
 
 if __name__ == '__main__':
