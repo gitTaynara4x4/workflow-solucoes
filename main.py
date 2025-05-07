@@ -13,8 +13,8 @@ app = Flask(__name__)
 load_dotenv()
 
 BITRIX_URL = os.getenv('BITRIX_URL')
-
-
+BASE_URL_API_BITRIX = os.getenv('BASE_URL_API_BITRIX')
+PROFILE = os.getenv('PROFILE')
 BITRIX_WEBHOOK_URL = f"{BITRIX_URL}/bizproc.workflow.start"
 
 
