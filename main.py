@@ -154,7 +154,7 @@ WORKFLOW_IDS = {
 
 
 
-@app.route('/webhook/<workflow_name>', methods=['POST'])
+@app.route('/webhook/<workflow_name>', methods=['POST', 'GET'])
 def start_workflow(workflow_name):
     print("✅ Webhook acionado!") 
     deal_id = request.args.get('deal_id')
